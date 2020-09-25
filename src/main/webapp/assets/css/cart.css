@@ -1,0 +1,93 @@
+.cart-title {
+    font-size: 20px;
+    font-weight: bolder;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.cart-thead {
+    height: 30px;
+    line-height: 30px;
+    border-bottom: 1px red solid;
+    margin-bottom: 10px;
+}
+
+.cart-item {
+    height: 120px;
+    border-top: 2px #666666 solid;
+    background-color: #fff4e8;
+    padding-top: 20px;
+    margin-bottom: 20px;
+}
+
+.p-msg {
+    font-size: 12px;
+}
+
+.decrement,
+.increment {
+    border: 1px solid #cacbcb;
+    height: 24px;
+    width: 24px;
+    line-height: 22px;
+    text-align: center;
+    color: #666;
+    background: #fff;
+    color: #666;
+    padding: 0;
+}
+
+a:focus {
+    text-decoration: none
+}
+
+.itxt {
+    float: left;
+    border: 1px solid #cacbcb;
+    width: 42px;
+    height: 24px;
+    line-height: 24px;
+    text-align: center;
+    padding: 1px;
+    margin: 0;
+    margin-left: -1px;
+    font-size: 12px;
+    font-family: verdana;
+    color: #333;
+    -webkit-appearance: none;
+}
+
+.cart-floatbar{
+    border: 1px #f0f0f0 solid;
+    height: 50px;
+    line-height: 50px;
+    margin-bottom: 20px;
+}
+
+.amount-sum em {
+    font-weight: 700;
+    color: #E2231A;
+    padding: 0 3px;
+}
+
+.price-sum em {
+    font-size: 16px;
+    color: #E2231A;
+    font-weight: 700;
+}
+
+.btn-area {
+    font-weight: 700;
+    height: 52px;
+    line-height: 52px;
+    color: #fff;
+    text-align: center;
+    font-size: 18px;
+    font-family: "Microsoft YaHei";
+    background: #e54346;
+    overflow: hidden;
+}
+
+.btn-area:hover {
+    cursor: pointer;
+}
