@@ -15,15 +15,15 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 public class OrderItem {
-    // @Column("itemid")
+
     private String id;
-    // @Column("quantity")
+
     private Integer quantity;
-    // @Column("total")
+
     private Double total;
-    // @Column("pid")
+
     private String pid;
-    // @Column("oid")
+
     private String oid;
 
     private Product product;

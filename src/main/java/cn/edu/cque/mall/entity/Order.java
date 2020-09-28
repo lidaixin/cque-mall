@@ -1,6 +1,5 @@
 package cn.edu.cque.mall.entity;
 
-import cn.edu.cque.mall.common.Column;
 import lombok.*;
 
 import java.util.ArrayList;
@@ -20,21 +19,13 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 public class Order {
-    @Column("oid")
     private String id;
-    @Column("ordertime")
     private Date createTime;
-    @Column("total")
     private Double total;
-    @Column("state")
     private Integer state;
-    @Column("address")
     private String address;
-    @Column("name")
     private String name;
-    @Column("telephone")
     private String telephone;
-    @Column("uid")
     private String uid;
 
     // 描述表与表之间的关系

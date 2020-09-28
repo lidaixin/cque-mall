@@ -7,7 +7,13 @@ import cn.edu.cque.mall.entity.CartItem;
 import cn.edu.cque.mall.entity.InfoResult;
 import cn.edu.cque.mall.entity.Product;
 import cn.edu.cque.mall.service.CartService;
+import cn.edu.cque.mall.service.CategoryService;
 import cn.edu.cque.mall.service.ProductService;
+import cn.edu.cque.mall.service.impl.ProductServiceImpl;
+import org.springframework.context.ApplicationContext;
+
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletException;
 
 /**
  * @ClassName CartServlet
@@ -18,9 +24,16 @@ import cn.edu.cque.mall.service.ProductService;
  **/
 public class CartServlet extends BaseServlet {
 
-    private CartService cartService = new CartService();
+    private CartService cartService;
 
-    private ProductService productService = new ProductService();
+    private ProductService productService;
+
+    @Override
+    public void init(ServletConfig config) throws ServletException {
+        ApplicationContext app = (ApplicationContext) config.getServletContext().getAttribute("app");
+        cartService = app.getBean(CartService.class);
+        productService = app.getBean(ProductService.class);
+    }
 
     @Path("list")
     public String cartList() {

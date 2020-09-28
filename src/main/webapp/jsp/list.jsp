@@ -24,7 +24,7 @@
         <c:forEach items="${pageResult.list}" var="product">
             <a href="/product/detail?id=${product.id}">
                 <div class="list-item">
-                    <img src="${product.image}" alt="">
+                    <img src="http://192.168.11.44:9090${product.image}" alt="">
                     <div class="price">
                         <strong>
                             <em>¥</em>

@@ -30,16 +30,4 @@
     <select id="findNewsList" resultMap="productMap">
         select * from product order by pdate desc
     </select>
-
-    <select id="findByPrice" resultMap="productMap">
-        select * from product
-        <where>
-            <if test="name != null and name != ''">
-                pname like #{name}
-            </if>
-            <if test="shopPrice != null and shopPrice != 0.0">
-                shop_price > #{shopPrice}
-            </if>
-        </where>
-    </select>
 </mapper>

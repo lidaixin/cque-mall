@@ -5,8 +5,12 @@ import cn.edu.cque.mall.common.Path;
 import cn.edu.cque.mall.entity.Category;
 import cn.edu.cque.mall.entity.PageResult;
 import cn.edu.cque.mall.entity.Product;
-import cn.edu.cque.mall.service.impl.CategoryServiceImpl;
+import cn.edu.cque.mall.service.CategoryService;
 import cn.edu.cque.mall.service.ProductService;
+import org.springframework.context.ApplicationContext;
+
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletException;
 
 /**
  * @ClassName ProductServlet
@@ -17,13 +21,22 @@ import cn.edu.cque.mall.service.ProductService;
  **/
 public class ProductServlet extends BaseServlet {
 
+    private CategoryService categoryService;
+    private ProductService productService;
+
+    @Override
+    public void init(ServletConfig config) throws ServletException {
+        ApplicationContext app = (ApplicationContext) config.getServletContext().getAttribute("app");
+        productService = app.getBean(ProductService.class);
+        categoryService = app.getBean(CategoryService.class);
+    }
+
     // 可以通过注解的方式让方法告诉BaseServlet该方法要处理的请求的路径
     @Path("/detail")
     public String findById() {
         // 1 接受参数
         String id = request.getParameter("id");
         // 2 查询数据
-        ProductService productService = new ProductService();
         Product product = productService.findById(id);
         // 3 存储数据
         request.setAttribute("product", product);
@@ -37,10 +50,8 @@ public class ProductServlet extends BaseServlet {
         int currentPage = Integer.parseInt(request.getParameter("currentPage"));
         int pageSize = Integer.parseInt(request.getParameter("pageSize"));
         // 2 查询数据
-        ProductService productService = new ProductService();
         PageResult<Product> pageResult = productService.findPageResultByCid(cid, currentPage, pageSize);
-        CategoryServiceImpl categoryServiceImpl = new CategoryServiceImpl();
-        Category category = categoryServiceImpl.findById(cid);
+        Category category = categoryService.findById(cid);
         // 3 将数据存到request域中并转发/jsp/list.jsp
         request.setAttribute("category", category);
         request.setAttribute("pageResult", pageResult);

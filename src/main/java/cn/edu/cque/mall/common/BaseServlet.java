@@ -74,6 +74,8 @@ public class BaseServlet extends HttpServlet {
         String uri = req.getRequestURI();
         Method[] methods = this.getClass().getDeclaredMethods();
         for (Method method : methods) {
+            Path annotation = method.getAnnotation(Path.class);
+            if (annotation == null) continue;
             String path = method.getAnnotation(Path.class).value();
             if (uri.contains(path)) {
                 return method;

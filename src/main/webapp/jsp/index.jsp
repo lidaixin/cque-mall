@@ -79,7 +79,7 @@
                 <c:forEach items="${hotList}" var="product">
                     <div class="product-item">
                         <a class="product-info card" href="/product/detail?id=${product.id}">
-                            <img src="${product.image}" style="margin-top: 20px" alt="">
+                            <img src="http://192.168.11.44:9090${product.image}" style="margin-top: 20px" alt="">
                             <h3 class="title"
                                 style="text-align: center; width: 100px; height: 30px; overflow: hidden">${product.name}</h3>
                             <p class="desc" style="width: 100px; height: 30px; overflow: hidden">${product.desc}</p>
@@ -111,7 +111,7 @@
                 <c:forEach items="${newsList}" var="product">
                     <div class="product-item">
                         <a class="product-info card" href="/product/detail?id=${product.id}">
-                            <img src="${product.image}" style="margin-top: 20px" alt="">
+                            <img src="http://192.168.11.44:9090${product.image}" style="margin-top: 20px" alt="">
                             <h3 class="title"
                                 style="text-align: center; width: 100px; height: 30px; overflow: hidden">${product.name}</h3>
                             <p class="desc" style="width: 100px; height: 30px; overflow: hidden">${product.desc}</p>

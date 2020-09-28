@@ -4,6 +4,8 @@ import cn.edu.cque.mall.entity.Cart;
 import cn.edu.cque.mall.entity.Order;
 import cn.edu.cque.mall.entity.User;
 
+import java.util.List;
+
 /**
  * @ClassName OrderService
  * @Description TODO
@@ -16,4 +18,8 @@ public interface OrderService {
     Order saveOrder(User user, Cart cart);
 
     void updateOrderInfo(Order order);
+
+    List<Order> findAllByUid(String uid);
+
+    Order findById(String id);
 }

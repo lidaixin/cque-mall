@@ -20,7 +20,6 @@ public interface CategoryMapper {
     // 注解+方法就会被Mybatis解析为一个statement,ID就是方法名
     // 如果sql语句及相关的配置比较简单,可以使用注解;反之,使用xml配置
     @Select("select * from category where cid = #{id}")
-    @ResultMap("categoryMap")
     Category findById(@Param("id") String id);
 
     @Select("select * from category")

@@ -2,9 +2,11 @@ package cn.edu.cque.mall.web.servlet;
 
 import cn.edu.cque.mall.entity.Category;
 import cn.edu.cque.mall.entity.Product;
-import cn.edu.cque.mall.service.impl.CategoryServiceImpl;
+import cn.edu.cque.mall.service.CategoryService;
 import cn.edu.cque.mall.service.ProductService;
+import org.springframework.context.ApplicationContext;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -20,14 +22,23 @@ import java.util.List;
  * @Version 1.0
  **/
 public class IndexServlet extends HttpServlet {
+
+    private CategoryService categoryService;
+    private ProductService productService;
+
+    @Override
+    public void init(ServletConfig config) throws ServletException {
+        ApplicationContext app = (ApplicationContext) config.getServletContext().getAttribute("app");
+        categoryService = app.getBean(CategoryService.class);
+        productService = app.getBean(ProductService.class);
+    }
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // 1 查询数据
         // 1.1 查询商品类别数据
-        CategoryServiceImpl categoryServiceImpl = new CategoryServiceImpl();
-        List<Category> categoryList = categoryServiceImpl.findAll();
+        List<Category> categoryList = categoryService.findAll();
         // 1.2 查询最新商品数据
-        ProductService productService = new ProductService();
         List<Product> hotList =  productService.findHot();
         List<Product> newsList =  productService.findNews();
         // 1.3 查询最热商品数据

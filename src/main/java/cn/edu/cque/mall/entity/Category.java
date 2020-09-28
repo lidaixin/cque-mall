@@ -16,8 +16,6 @@ import lombok.*;
 @Builder
 public class Category {
 
-    // @Column("cid")
-    private String id;
-    // @Column("cname")
-    private String name;
+    private String cid;
+    private String cname;
 }

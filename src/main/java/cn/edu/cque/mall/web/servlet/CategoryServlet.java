@@ -3,8 +3,11 @@ package cn.edu.cque.mall.web.servlet;
 import cn.edu.cque.mall.common.BaseServlet;
 import cn.edu.cque.mall.common.Path;
 import cn.edu.cque.mall.entity.Category;
-import cn.edu.cque.mall.service.impl.CategoryServiceImpl;
+import cn.edu.cque.mall.service.CategoryService;
+import org.springframework.context.ApplicationContext;
 
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletException;
 import java.util.List;
 
 /**
@@ -16,9 +19,17 @@ import java.util.List;
  **/
 public class CategoryServlet extends BaseServlet {
 
+    private CategoryService categoryService;
+
+    @Override
+    public void init(ServletConfig config) throws ServletException {
+        ApplicationContext app = (ApplicationContext) config.getServletContext().getAttribute("app");
+        categoryService = app.getBean(CategoryService.class);
+    }
+
     // /category/list
     @Path("list")
     public List<Category> findAll() {
-        return new CategoryServiceImpl().findAll();
+        return categoryService.findAll();
     }
 }

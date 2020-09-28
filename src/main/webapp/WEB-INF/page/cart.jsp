@@ -38,7 +38,7 @@
                 <div class="col-md-4 p-goods">
                     <div class="row">
                         <div class="col-md-4 p-img img-thumbnail">
-                            <img width="40px" height="40px" src="${cartItem.product.image}" alt="">
+                            <img width="40px" height="40px" src="http://192.168.11.44:9090${cartItem.product.image}" alt="">
                         </div>
                         <div class="col-md-8 p-msg">${cartItem.product.desc}</div>
                     </div>

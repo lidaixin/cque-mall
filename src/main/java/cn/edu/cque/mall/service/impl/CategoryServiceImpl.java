@@ -1,17 +1,15 @@
 package cn.edu.cque.mall.service.impl;
 
-import cn.edu.cque.mall.common.Dao;
-import cn.edu.cque.mall.common.Transaction;
-import cn.edu.cque.mall.dao.CategoryDao;
 import cn.edu.cque.mall.entity.Category;
 import cn.edu.cque.mall.mapper.CategoryMapper;
 import cn.edu.cque.mall.service.CategoryService;
 import cn.edu.cque.mall.utils.JedisUtils;
-import cn.edu.cque.mall.utils.SqlSessionUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 import redis.clients.jedis.Jedis;
 
@@ -26,9 +24,10 @@ import java.util.List;
  * @Date 2020/9/22 10:25
  * @Version 1.0
  **/
+@Service
 public class CategoryServiceImpl implements CategoryService {
 
-    @Dao
+    @Autowired
     private CategoryMapper categorymapper;
 
     public List<Category> findAll() {
@@ -66,7 +65,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    @Transaction
+    @Transactional
     public void save(Category category) {
         categorymapper.save(category);
     }

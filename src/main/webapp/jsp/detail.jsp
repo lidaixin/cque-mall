@@ -13,7 +13,7 @@
 <!-- 主体 -->
 <section class="container">
     <div class="row product-content-container">
-        <img class="col-md-4 col-md-offset-1 img-thumbnail" src="${product.image}" alt="">
+        <img class="col-md-4 col-md-offset-1 img-thumbnail" src="http://192.168.11.44:9090${product.image}" alt="">
         <div class="col-md-4 col-md-offset-2 price-container">
             <span class="product-title">${product.name}</span>
             <span class="product-price"><del>市场价：¥${product.marketPrice}</del></span>

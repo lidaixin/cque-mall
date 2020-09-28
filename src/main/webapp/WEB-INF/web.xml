@@ -28,11 +28,16 @@
         <!-- <url-pattern>/order/*</url-pattern> -->
     </filter-mapping>
 
+    <!-- Spring容器监听器 -->
+    <listener>
+        <listener-class>cn.edu.cque.mall.web.listener.SpringContextListener</listener-class>
+    </listener>
+
     <!-- 首页 -->
     <servlet>
         <servlet-name>indexServlet</servlet-name>
         <servlet-class>cn.edu.cque.mall.web.servlet.IndexServlet</servlet-class>
-        <load-on-startup>1</load-on-startup>
+<!--        <load-on-startup>1</load-on-startup>-->
     </servlet>
     <servlet-mapping>
         <servlet-name>indexServlet</servlet-name>
@@ -43,7 +48,7 @@
     <servlet>
         <servlet-name>productServlet</servlet-name>
         <servlet-class>cn.edu.cque.mall.web.servlet.ProductServlet</servlet-class>
-        <load-on-startup>1</load-on-startup>
+<!--        <load-on-startup>1</load-on-startup>-->
     </servlet>
     <servlet-mapping>
         <servlet-name>productServlet</servlet-name>
@@ -54,7 +59,7 @@
     <servlet>
         <servlet-name>categoryServlet</servlet-name>
         <servlet-class>cn.edu.cque.mall.web.servlet.CategoryServlet</servlet-class>
-        <load-on-startup>1</load-on-startup>
+<!--        <load-on-startup>1</load-on-startup>-->
     </servlet>
     <servlet-mapping>
         <servlet-name>categoryServlet</servlet-name>
@@ -65,7 +70,7 @@
     <servlet>
         <servlet-name>CaptchaServlet</servlet-name>
         <servlet-class>com.wf.captcha.servlet.CaptchaServlet</servlet-class>
-        <load-on-startup>1</load-on-startup>
+<!--        <load-on-startup>1</load-on-startup>-->
     </servlet>
     <servlet-mapping>
         <servlet-name>CaptchaServlet</servlet-name>
@@ -76,7 +81,7 @@
     <servlet>
         <servlet-name>UserServlet</servlet-name>
         <servlet-class>cn.edu.cque.mall.web.servlet.UserServlet</servlet-class>
-        <load-on-startup>1</load-on-startup>
+<!--        <load-on-startup>1</load-on-startup>-->
     </servlet>
     <servlet-mapping>
         <servlet-name>UserServlet</servlet-name>
@@ -87,7 +92,7 @@
     <servlet>
         <servlet-name>CartServlet</servlet-name>
         <servlet-class>cn.edu.cque.mall.web.servlet.CartServlet</servlet-class>
-        <load-on-startup>1</load-on-startup>
+<!--        <load-on-startup>1</load-on-startup>-->
     </servlet>
     <servlet-mapping>
         <servlet-name>CartServlet</servlet-name>
@@ -98,7 +103,7 @@
     <servlet>
         <servlet-name>OrderServlet</servlet-name>
         <servlet-class>cn.edu.cque.mall.web.servlet.OrderServlet</servlet-class>
-        <load-on-startup>1</load-on-startup>
+<!--        <load-on-startup>1</load-on-startup>-->
     </servlet>
     <servlet-mapping>
         <servlet-name>OrderServlet</servlet-name>

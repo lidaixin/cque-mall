@@ -5,9 +5,15 @@ import cn.edu.cque.mall.common.Path;
 import cn.edu.cque.mall.entity.Cart;
 import cn.edu.cque.mall.entity.Order;
 import cn.edu.cque.mall.entity.User;
-import cn.edu.cque.mall.service.impl.OrderServiceImpl;
+import cn.edu.cque.mall.service.OrderService;
+import org.apache.commons.beanutils.BeanUtils;
+import org.springframework.context.ApplicationContext;
 
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @ClassName OrderServlet
@@ -17,7 +23,13 @@ import java.util.List;
  * @Version 1.0
  **/
 public class OrderServlet extends BaseServlet {
-    private OrderServiceImpl orderServiceImpl = new OrderServiceImpl();
+    private OrderService orderService;
+
+    @Override
+    public void init(ServletConfig config) throws ServletException {
+        ApplicationContext app = (ApplicationContext) config.getServletContext().getAttribute("app");
+        orderService = app.getBean(OrderService.class);
+    }
 
     /***
      * 订单是由购物车转化来的
@@ -30,7 +42,7 @@ public class OrderServlet extends BaseServlet {
         User user = (User) request.getSession().getAttribute("loginUser");
         Cart cart = (Cart) request.getSession().getAttribute("cart");
         // 2 创建订单
-        Order order = orderServiceImpl.createOrder(user, cart);
+        Order order = orderService.saveOrder(user, cart);
         // 3 将数据存入request域中跳转页面
         request.setAttribute("order", order);
         return "/WEB-INF/page/order-info";
@@ -39,12 +51,17 @@ public class OrderServlet extends BaseServlet {
     @Path("update-order")
     public String updateOrder() {
         // 1 获取参数
-        String id = request.getParameter("id");
-        String name = request.getParameter("name");
-        String address = request.getParameter("address");
-        String telephone = request.getParameter("telephone");
+        Map<String, String[]> parameterMap = request.getParameterMap();
+        Order order = new Order();
+        try {
+            BeanUtils.populate(order,parameterMap);
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
         // 2 更新订单
-        orderServiceImpl.updateOrder(id, name, address, telephone);
+        orderService.updateOrderInfo(order);
         // 3 重定向到订单列表页面
         return "redirect:/order/list";
     }
@@ -54,7 +71,7 @@ public class OrderServlet extends BaseServlet {
         // 1 从session中获取用户
         User loginUser = (User) request.getSession().getAttribute("loginUser");
         // 1 查询订单列表
-        List<Order> orderList = orderServiceImpl.findAllByUid(loginUser.getId());
+        List<Order> orderList = orderService.findAllByUid(loginUser.getId());
         // 2 存储数据
         request.setAttribute("orderList", orderList);
         // 3 跳转页面

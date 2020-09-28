@@ -1,6 +1,5 @@
 package cn.edu.cque.mall.mapper;
 
-import cn.edu.cque.mall.common.Select;
 import cn.edu.cque.mall.entity.User;
 import org.apache.ibatis.annotations.Param;
 
@@ -13,6 +12,5 @@ import org.apache.ibatis.annotations.Param;
  **/
 public interface UserMapper {
 
-    // @Select("select * from user where username = ? and password = ?")
     User findByUsernameAndPassword(@Param("username") String username, @Param("password") String password);
 }

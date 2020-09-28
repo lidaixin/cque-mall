@@ -6,6 +6,10 @@ import cn.edu.cque.mall.entity.InfoResult;
 import cn.edu.cque.mall.entity.User;
 import cn.edu.cque.mall.service.UserService;
 import com.wf.captcha.utils.CaptchaUtil;
+import org.springframework.context.ApplicationContext;
+
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletException;
 
 /**
  * @ClassName LoginServlet
@@ -18,7 +22,13 @@ public class UserServlet extends BaseServlet {
 
     // 1 在servlet中的成员不要作修改
     // 2 对于线程不安全问题可以通过事务来解决
-    private UserService userService = new UserService();
+    private UserService userService;
+
+    @Override
+    public void init(ServletConfig config) throws ServletException {
+        ApplicationContext app = (ApplicationContext) config.getServletContext().getAttribute("app");
+        userService = app.getBean(UserService.class);
+    }
 
     /**
      * @return cn.edu.cque.mall.entity.InfoResult

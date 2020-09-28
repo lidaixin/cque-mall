@@ -1,7 +1,5 @@
 package cn.edu.cque.mall.mapper;
 
-import cn.edu.cque.mall.common.Insert;
-import cn.edu.cque.mall.common.Select;
 import cn.edu.cque.mall.entity.OrderItem;
 import org.apache.ibatis.annotations.Param;
 
@@ -22,10 +20,4 @@ public interface OrderItemMapper {
 
     List<OrderItem> findAllByOid(@Param("oid") String oid);
 
-    //------------------------------------------------------------------------------
-    @Insert("insert into orderitem values(?,?,?,?,?)")
-    Integer insert(String id, int quantity, double total, String pid, String oid);
-
-    @Select("select * from orderitem where oid = ?")
-    List<OrderItem> findListByOid(String id);
 }
