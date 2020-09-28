@@ -7,7 +7,7 @@ import java.util.List;
 
 /**
  * @ClassName OrderItemMapper
- * @Description TODO
+ * @Description
  * @Author YoungWinter
  * @Date 2020/9/25 10:39
  * @Version 1.0
