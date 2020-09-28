@@ -5,7 +5,7 @@ import cn.edu.cque.mall.common.Path;
 import cn.edu.cque.mall.entity.Cart;
 import cn.edu.cque.mall.entity.Order;
 import cn.edu.cque.mall.entity.User;
-import cn.edu.cque.mall.service.OrderService;
+import cn.edu.cque.mall.service.impl.OrderServiceImpl;
 
 import java.util.List;
 
@@ -17,7 +17,7 @@ import java.util.List;
  * @Version 1.0
  **/
 public class OrderServlet extends BaseServlet {
-    private OrderService orderService = new OrderService();
+    private OrderServiceImpl orderServiceImpl = new OrderServiceImpl();
 
     /***
      * 订单是由购物车转化来的
@@ -30,7 +30,7 @@ public class OrderServlet extends BaseServlet {
         User user = (User) request.getSession().getAttribute("loginUser");
         Cart cart = (Cart) request.getSession().getAttribute("cart");
         // 2 创建订单
-        Order order = orderService.createOrder(user, cart);
+        Order order = orderServiceImpl.createOrder(user, cart);
         // 3 将数据存入request域中跳转页面
         request.setAttribute("order", order);
         return "/WEB-INF/page/order-info";
@@ -44,7 +44,7 @@ public class OrderServlet extends BaseServlet {
         String address = request.getParameter("address");
         String telephone = request.getParameter("telephone");
         // 2 更新订单
-        orderService.updateOrder(id, name, address, telephone);
+        orderServiceImpl.updateOrder(id, name, address, telephone);
         // 3 重定向到订单列表页面
         return "redirect:/order/list";
     }
@@ -54,7 +54,7 @@ public class OrderServlet extends BaseServlet {
         // 1 从session中获取用户
         User loginUser = (User) request.getSession().getAttribute("loginUser");
         // 1 查询订单列表
-        List<Order> orderList = orderService.findAllByUid(loginUser.getId());
+        List<Order> orderList = orderServiceImpl.findAllByUid(loginUser.getId());
         // 2 存储数据
         request.setAttribute("orderList", orderList);
         // 3 跳转页面

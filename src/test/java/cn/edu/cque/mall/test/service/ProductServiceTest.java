@@ -36,11 +36,6 @@ public class ProductServiceTest {
         productList.forEach(System.out::println);
     }
 
-    @Test
-    public void findListByCidTest() {
-        List<Product> productList = service.findListByCid("1");
-        productList.forEach(System.out::println);
-    }
 
     @Test
     public void findPageResultByCidTest() {

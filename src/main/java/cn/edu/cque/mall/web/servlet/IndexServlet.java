@@ -2,7 +2,7 @@ package cn.edu.cque.mall.web.servlet;
 
 import cn.edu.cque.mall.entity.Category;
 import cn.edu.cque.mall.entity.Product;
-import cn.edu.cque.mall.service.CategoryService;
+import cn.edu.cque.mall.service.impl.CategoryServiceImpl;
 import cn.edu.cque.mall.service.ProductService;
 
 import javax.servlet.ServletException;
@@ -24,8 +24,8 @@ public class IndexServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // 1 查询数据
         // 1.1 查询商品类别数据
-        CategoryService categoryService = new CategoryService();
-        List<Category> categoryList = categoryService.findAll();
+        CategoryServiceImpl categoryServiceImpl = new CategoryServiceImpl();
+        List<Category> categoryList = categoryServiceImpl.findAll();
         // 1.2 查询最新商品数据
         ProductService productService = new ProductService();
         List<Product> hotList =  productService.findHot();

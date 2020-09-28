@@ -1,8 +1,7 @@
 package cn.edu.cque.mall.entity;
 
 import cn.edu.cque.mall.common.Column;
-import lombok.Data;
-import lombok.ToString;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -17,6 +16,9 @@ import java.util.List;
  **/
 @Data
 @ToString
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Order {
     @Column("oid")
     private String id;

@@ -1,8 +1,12 @@
 package cn.edu.cque.mall.service;
 
-import cn.edu.cque.mall.dao.ProductDao;
 import cn.edu.cque.mall.entity.PageResult;
 import cn.edu.cque.mall.entity.Product;
+import cn.edu.cque.mall.mapper.ProductMapper;
+import cn.edu.cque.mall.utils.SqlSessionUtil;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import org.apache.ibatis.session.SqlSession;
 
 import java.util.List;
 
@@ -14,51 +18,48 @@ import java.util.List;
  * @Version 1.0
  **/
 public class ProductService {
-    private ProductDao productDao = new ProductDao();
+    // private ProductDao productDao = new ProductDao();
 
     public List<Product> findHot() {
-        return productDao.findHot();
+        SqlSession sqlSession = SqlSessionUtil.getSqlSession();
+        ProductMapper mapper = sqlSession.getMapper(ProductMapper.class);
+        List<Product> hotList = mapper.findHotList();
+        sqlSession.close();
+        return hotList;
     }
 
     public List<Product> findNews() {
-        return productDao.findNews();
+        SqlSession sqlSession = SqlSessionUtil.getSqlSession();
+        ProductMapper mapper = sqlSession.getMapper(ProductMapper.class);
+        List<Product> newsList = mapper.findNewsList();
+        sqlSession.close();
+        return newsList;
     }
 
-    public List<Product> findListByCid(String cid) {
-        return productDao.findListByCid(cid);
-    }
+//    public List<Product> findListByCid(String cid) {
+//        return productDao.findListByCid(cid);
+//    }
 
     public PageResult<Product> findPageResultByCid(String cid, int currentPage, int pageSize) {
-        /**
-         * 列表数据select * from product where cid = ? limit 开始的索引,pageSize
-         * 第1页 10  ----->limit 0, 10   (currentPage-1)*pageSize
-         * 第2页 10  ----->limit 10, 10
-         * 第3页 10  ----->limit 20, 10
-         * 总记录数select count(*) from product
-         * 总页数 30  10  ---->  3
-         * 总页数 28  10  ---->  2...8   3
-         * 总页数 31  10  ---->  3...1   4
-         **/
-        // 列表数据
-        int index = (currentPage - 1) * pageSize;
-        List<Product> list = productDao.findListByCidAndPage(cid, index, pageSize);
-        // 总记录数
-        int totalNumber = productDao.findTotalNumber(cid);
-        // 总页数
-        int totalPage = totalNumber % pageSize == 0 ? (totalNumber / pageSize) : (totalNumber / pageSize) + 1;
-        // 封装PageResult
+        SqlSession sqlSession = SqlSessionUtil.getSqlSession();
+        ProductMapper mapper = sqlSession.getMapper(ProductMapper.class);
+        PageHelper.startPage(currentPage, pageSize);
+        List<Product> productList = mapper.findListByCid(cid);
+        PageInfo<Product> pageInfo = new PageInfo<>(productList);
         PageResult<Product> pageResult = new PageResult<>();
-        pageResult.setList(list);
-        pageResult.setTotalNumber(totalNumber);
-        pageResult.setTotalPage(totalPage);
+        pageResult.setList(pageInfo.getList());
         pageResult.setCurrentPage(currentPage);
+        pageResult.setTotalNumber((int) pageInfo.getTotal());
+        pageResult.setTotalPage(pageInfo.getPages());
+        sqlSession.close();
         return pageResult;
     }
 
     public Product findById(String id) {
-        List<Product> list = productDao.findById(id);
-        if (list != null && list.size() > 0)
-            return list.get(0);
-        return null;
+        SqlSession sqlSession = SqlSessionUtil.getSqlSession();
+        ProductMapper mapper = sqlSession.getMapper(ProductMapper.class);
+        Product product = mapper.findById(id);
+        sqlSession.close();
+        return product;
     }
 }

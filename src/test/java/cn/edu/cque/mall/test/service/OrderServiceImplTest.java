@@ -1,7 +1,7 @@
 package cn.edu.cque.mall.test.service;
 
 import cn.edu.cque.mall.entity.Order;
-import cn.edu.cque.mall.service.OrderService;
+import cn.edu.cque.mall.service.impl.OrderServiceImpl;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -14,13 +14,13 @@ import java.util.List;
  * @Date 2020/9/25 16:38
  * @Version 1.0
  **/
-public class OrderServiceTest {
+public class OrderServiceImplTest {
 
-    private OrderService service;
+    private OrderServiceImpl service;
 
     @Before
     public void beforeTest() {
-        service = new OrderService();
+        service = new OrderServiceImpl();
     }
 
     @Test

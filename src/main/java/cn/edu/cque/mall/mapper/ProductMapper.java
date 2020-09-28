@@ -2,6 +2,7 @@ package cn.edu.cque.mall.mapper;
 
 import cn.edu.cque.mall.common.Select;
 import cn.edu.cque.mall.entity.Product;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -14,8 +15,20 @@ import java.util.List;
  **/
 public interface ProductMapper {
 
-    @Select("select * from product where pid = ?")
-    Product findById(String id);
+    // @Select("select * from product where pid = ?")
+    Product findById(@Param("id") String id);
+
+    List<Product> findAllByCid(@Param("cid")String cid);
+
+    // @Select("select * from product where is_hot = ? limit ?, ?")
+    List<Product> findHotList();
+
+    // @Select("select * from product order by pdate desc limit ?, ?")
+    List<Product> findNewsList();
+
+    List<Product> findByPrice(Product product);
+
+    //----------------------------------------------------------------------------
 
     @Select("select count(*) from product where cid = ?")
     int findTotalNumber(String cid);

@@ -5,15 +5,8 @@ import cn.edu.cque.mall.common.Path;
 import cn.edu.cque.mall.entity.Category;
 import cn.edu.cque.mall.entity.PageResult;
 import cn.edu.cque.mall.entity.Product;
-import cn.edu.cque.mall.service.CategoryService;
+import cn.edu.cque.mall.service.impl.CategoryServiceImpl;
 import cn.edu.cque.mall.service.ProductService;
-
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.util.List;
 
 /**
  * @ClassName ProductServlet
@@ -46,8 +39,8 @@ public class ProductServlet extends BaseServlet {
         // 2 查询数据
         ProductService productService = new ProductService();
         PageResult<Product> pageResult = productService.findPageResultByCid(cid, currentPage, pageSize);
-        CategoryService categoryService = new CategoryService();
-        Category category = categoryService.findById(cid);
+        CategoryServiceImpl categoryServiceImpl = new CategoryServiceImpl();
+        Category category = categoryServiceImpl.findById(cid);
         // 3 将数据存到request域中并转发/jsp/list.jsp
         request.setAttribute("category", category);
         request.setAttribute("pageResult", pageResult);

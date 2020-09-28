@@ -5,6 +5,8 @@ import cn.edu.cque.mall.entity.Product;
 import cn.edu.cque.mall.mapper.OrderItemMapper;
 import cn.edu.cque.mall.mapper.ProductMapper;
 import cn.edu.cque.mall.utils.MapperUtil;
+import cn.edu.cque.mall.utils.SqlSessionUtil;
+import org.apache.ibatis.session.SqlSession;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,16 +20,12 @@ import java.util.stream.Collectors;
  **/
 public class OrderItemService {
 
-    private OrderItemMapper mapper = MapperUtil.getMapper(OrderItemMapper.class);
-
-    private ProductMapper productMapper = MapperUtil.getMapper(ProductMapper.class);
-
     public List<OrderItem> findListByOid(String oid) {
-        return mapper.findListByOid(oid).stream().map(i -> {
-            Product product = productMapper.findById(i.getPid());
-            i.setProduct(product);
-            return i;
-        }).collect(Collectors.toList());
+        SqlSession sqlSession = SqlSessionUtil.getSqlSession();
+        OrderItemMapper mapper = sqlSession.getMapper(OrderItemMapper.class);
+        List<OrderItem> all = mapper.findAllByOid(oid);
+        sqlSession.close();
+        return all;
     }
 
 }

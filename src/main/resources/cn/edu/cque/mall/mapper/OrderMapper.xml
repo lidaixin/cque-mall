@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.cque.mall.mapper.OrderMapper">
+
+    <!-- 自定义映射规则 -->
+    <resultMap id="orderMap" type="order">
+        <id column="oid" property="id"/>
+        <result column="ordertime" property="createTime"/>
+        <result column="total" property="total"/>
+        <result column="state" property="state"/>
+        <result column="address" property="address"/>
+        <result column="name" property="name"/>
+        <result column="telephone" property="telephone"/>
+        <result column="uid" property="uid"/>
+        <collection property="orderItemList" fetchType="lazy" column="oid"
+                    select="cn.edu.cque.mall.mapper.OrderItemMapper.findAllByOid"/>
+    </resultMap>
+
+    <!-- 保存订单 -->
+    <insert id="save" parameterType="order">
+        insert into orders(oid, ordertime, total, state, uid)
+        values(#{id}, #{createTime}, #{total}, #{state}, #{uid})
+    </insert>
+
+    <!-- 通过动态sql语句来根据条件进行更新
+        如果在OGNL表达式中书写一些特殊字符,那么这些字符可以使用HTML中对应的写法
+     -->
+    <update id="updateOrderInfo" parameterType="order">
+        update orders
+        <trim prefix="set" suffixOverrides=",">
+            <if test="name != null and name != ''">
+                name = #{name},
+            </if>
+            <if test="address != null and address != ''">
+                address = #{address},
+            </if>
+            <if test="telephone != null and telephone != ''">
+                telephone = #{telephone},
+            </if>
+        </trim>
+        where oid = #{id}
+    </update>
+
+    <select id="findById" resultMap="orderMap">
+        select * from orders where oid = #{id}
+    </select>
+
+</mapper>

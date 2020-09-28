@@ -17,33 +17,33 @@ import java.util.Date;
 @ToString
 public class User {
 
-    @Column("uid")
+    //@Column("uid")
     private String id;
 
-    @Column("username")
+   // @Column("username")
     private String username;// 用户名
 
-    @Column("password")
+    //@Column("password")
     private String password;
 
-    @Column("name")
+    //@Column("name")
     private String name;//姓名
 
-    @Column("email")
+    //@Column("email")
     private String email;
 
-    @Column("telephone")
+    //@Column("telephone")
     private String phone;
 
-    @Column("birthday")
+    //@Column("birthday")
     private Date birthday;
 
-    @Column("sex")
+    //@Column("sex")
     private String sex;
 
-    @Column("state")
+    //@Column("state")
     private Integer state;// 用户的状态
 
-    @Column("code")
+    //@Column("code")
     private String code;// 用户名的激活码
 }

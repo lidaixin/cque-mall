@@ -1,8 +1,6 @@
 package cn.edu.cque.mall.entity;
 
-import cn.edu.cque.mall.common.Column;
-import lombok.Data;
-import lombok.ToString;
+import lombok.*;
 
 /**
  * @ClassName Category
@@ -11,14 +9,15 @@ import lombok.ToString;
  * @Date 2020/9/22 10:16
  * @Version 1.0
  **/
-//@NoArgsConstructor// 无参构造器
-//@AllArgsConstructor// 全参构造器
+@NoArgsConstructor// 无参构造器
+@AllArgsConstructor// 全参构造器
 @Data// 自动生成setter和getter
 @ToString// 自动生成toString()
+@Builder
 public class Category {
 
-    @Column("cid")
-    private String cid;
-    @Column("cname")
-    private String cname;
+    // @Column("cid")
+    private String id;
+    // @Column("cname")
+    private String name;
 }

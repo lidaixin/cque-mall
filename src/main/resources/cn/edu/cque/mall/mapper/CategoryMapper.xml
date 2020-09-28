@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 这些映射器的 XML 映射文件包含了 SQL 代码和映射定义信息。
+    namespace:命名空间,作用1是区别不同的Mapping配置文件2关联Mapper接口
+-->
+<mapper namespace="cn.edu.cque.mall.mapper.CategoryMapper">
+    <resultMap id="categoryMap" type="category">
+        <id column="cid" property="id"/>
+        <result column="cname" property="name"/>
+    </resultMap>
+    <!--    Mapped Statements collection already contains value for cn.edu.cque.mall.mapper.CategoryMapper.findById-->
+
+    <!--    <select id="findById" resultType="category">-->
+    <!--        select * from category where cid = #{id}-->
+    <!--    </select>-->
+
+    <!--    <select id="findAll" resultType="category">-->
+    <!--        select * from category-->
+    <!--    </select>-->
+</mapper>

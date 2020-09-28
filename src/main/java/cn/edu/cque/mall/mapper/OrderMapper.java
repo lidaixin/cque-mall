@@ -4,6 +4,7 @@ import cn.edu.cque.mall.common.Insert;
 import cn.edu.cque.mall.common.Select;
 import cn.edu.cque.mall.common.Update;
 import cn.edu.cque.mall.entity.Order;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.Date;
 import java.util.List;
@@ -17,8 +18,8 @@ import java.util.List;
  **/
 public interface OrderMapper {
 
-    @Select("select * from orders where oid = ?")
-    Order findById(String id);
+    //@Select("select * from orders where oid = ?")
+    Order findById(@Param("id") String id);
 
     @Insert("insert into orders(oid,ordertime,total,state,uid) values(?,?,?,?,?)")
     int insert(String id, Date creatTime, double total, int state, String uid);
@@ -28,4 +29,8 @@ public interface OrderMapper {
 
     @Select("select * from orders where uid = ?")
     List<Order> findAllByUid(String uid);
+
+    void save(Order order);
+
+    void updateOrderInfo(Order order);
 }

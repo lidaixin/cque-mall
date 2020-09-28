@@ -1,7 +1,7 @@
 package cn.edu.cque.mall.test.service;
 
 import cn.edu.cque.mall.entity.Category;
-import cn.edu.cque.mall.service.CategoryService;
+import cn.edu.cque.mall.service.impl.CategoryServiceImpl;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -14,13 +14,13 @@ import java.util.List;
  * @Date 2020/9/22 10:41
  * @Version 1.0
  **/
-public class CategoryServiceTest {
+public class CategoryServiceImplTest {
 
-    private CategoryService service;
+    private CategoryServiceImpl service;
 
     @Before
     public void beforeTest() {
-        service = new CategoryService();
+        service = new CategoryServiceImpl();
     }
 
     @Test

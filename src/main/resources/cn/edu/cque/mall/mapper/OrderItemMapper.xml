@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.cque.mall.mapper.OrderItemMapper">
+
+    <!-- 自定义映射规则 -->
+    <resultMap id="orderItemMap" type="orderItem">
+        <id column="itemid" property="id"/>
+        <result column="quantity" property="quantity"/>
+        <result column="total" property="total"/>
+        <result column="pid" property="pid"/>
+        <result column="oid" property="oid"/>
+        <!-- fetchType	可选的。有效值为 lazy(延迟加载) 和 eager(立即加载)。
+            指定属性后，将在映射中忽略全局配置参数 lazyLoadingEnabled，使用属性的值。-->
+        <association property="product"
+                     select="cn.edu.cque.mall.mapper.ProductMapper.findById"
+                     column="pid"
+                     fetchType="lazy"
+        />
+    </resultMap>
+
+    <!-- 保存订单项 -->
+    <insert id="save" parameterType="orderItem">
+        insert into orderitem(itemid, quantity, total, pid, oid)
+        values(#{id}, #{quantity}, #{total}, #{pid}, #{oid})
+    </insert>
+
+    <!-- 批量保存订单项
+        item:遍历的每一项的变量名
+        index:每一次的索引
+        collection:参数中集合的名称
+        open:以什么开始
+        close:以什么结束
+        separator:每一项以什么分割
+        你可以将任何可迭代对象（如 List、Set 等）、Map 对象或者数组对象作为集合参数传递给 foreach。
+        当使用可迭代对象或者数组时，index 是当前迭代的序号，item 的值是本次迭代获取到的元素。
+        当使用 Map 对象（或者 Map.Entry 对象的集合）时，index 是键，item 是值。
+     -->
+    <insert id="saveBatch">
+        insert into orderitem(itemid, quantity, total, pid, oid)
+        values
+        <foreach item="item" index="index" collection="orderItemList" separator=",">
+            (#{item.id}, #{item.quantity}, #{item.total}, #{item.pid}, #{item.oid})
+        </foreach>
+    </insert>
+
+    <!-- 根据oid查询订单项列表 -->
+    <select id="findAllByOid" resultMap="orderItemMap">
+        select * from orderitem where oid = #{oid}
+    </select>
+
+</mapper>

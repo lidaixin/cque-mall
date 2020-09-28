@@ -1,8 +1,6 @@
 package cn.edu.cque.mall.entity;
 
-import cn.edu.cque.mall.common.Column;
-import lombok.Data;
-import lombok.ToString;
+import lombok.*;
 
 /**
  * @ClassName OrderItem
@@ -13,16 +11,19 @@ import lombok.ToString;
  **/
 @Data
 @ToString
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class OrderItem {
-    @Column("itemid")
+    // @Column("itemid")
     private String id;
-    @Column("quantity")
+    // @Column("quantity")
     private Integer quantity;
-    @Column("total")
+    // @Column("total")
     private Double total;
-    @Column("pid")
+    // @Column("pid")
     private String pid;
-    @Column("oid")
+    // @Column("oid")
     private String oid;
 
     private Product product;

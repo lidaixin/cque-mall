@@ -3,7 +3,7 @@ package cn.edu.cque.mall.web.servlet;
 import cn.edu.cque.mall.common.BaseServlet;
 import cn.edu.cque.mall.common.Path;
 import cn.edu.cque.mall.entity.Category;
-import cn.edu.cque.mall.service.CategoryService;
+import cn.edu.cque.mall.service.impl.CategoryServiceImpl;
 
 import java.util.List;
 
@@ -19,6 +19,6 @@ public class CategoryServlet extends BaseServlet {
     // /category/list
     @Path("list")
     public List<Category> findAll() {
-        return new CategoryService().findAll();
+        return new CategoryServiceImpl().findAll();
     }
 }

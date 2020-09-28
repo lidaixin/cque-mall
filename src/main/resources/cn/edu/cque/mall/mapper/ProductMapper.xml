@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.cque.mall.mapper.ProductMapper">
+
+    <resultMap id="productMap" type="product">
+        <id column="pid" property="id"/>
+        <result column="pname" property="name"/>
+        <result column="market_price" property="marketPrice"/>
+        <result column="shop_price" property="shopPrice"/>
+        <result column="pimage" property="image"/>
+        <result column="pdate" property="createDate"/>
+        <result column="is_hot" property="isHot"/>
+        <result column="pdesc" property="desc"/>
+        <result column="pflag" property="flag"/>
+        <result column="cid" property="cid"/>
+    </resultMap>
+
+    <select id="findById" resultMap="productMap">
+        select * from product where pid = #{id}
+    </select>
+
+    <select id="findAllByCid" resultMap="productMap">
+        select * from product where cid = #{cid}
+    </select>
+
+    <select id="findHotList" resultMap="productMap">
+        select * from product where is_hot = '1'
+    </select>
+
+    <select id="findNewsList" resultMap="productMap">
+        select * from product order by pdate desc
+    </select>
+
+    <select id="findByPrice" resultMap="productMap">
+        select * from product
+        <where>
+            <if test="name != null and name != ''">
+                pname like #{name}
+            </if>
+            <if test="shopPrice != null and shopPrice != 0.0">
+                shop_price > #{shopPrice}
+            </if>
+        </where>
+    </select>
+</mapper>

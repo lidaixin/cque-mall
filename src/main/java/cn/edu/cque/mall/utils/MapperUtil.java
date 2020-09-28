@@ -15,6 +15,7 @@ import java.lang.reflect.Proxy;
 public class MapperUtil {
 
     // 获取Mapper对应的代理对象
+    // 通过JDK的代理模式产生了一个接口的匿名实现类的对象
     // 泛型方法
     public static <T> T getMapper(Class<T> clazz) {
         return (T) Proxy.newProxyInstance(clazz.getClassLoader(),
