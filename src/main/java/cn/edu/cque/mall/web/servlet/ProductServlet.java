@@ -15,7 +15,7 @@ import javax.servlet.ServletException;
 
 /**
  * @ClassName ProductServlet
- * @Description TODO
+ * @Description 商品Servlet
  * @Author YoungWinter
  * @Date 2020/9/23 11:31
  * @Version 1.0
