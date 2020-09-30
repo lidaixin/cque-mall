@@ -11,6 +11,7 @@ import cn.edu.cque.mall.service.CategoryService;
 import cn.edu.cque.mall.service.ProductService;
 import cn.edu.cque.mall.service.impl.ProductServiceImpl;
 import org.springframework.context.ApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -24,17 +25,6 @@ import javax.servlet.ServletException;
  **/
 public class CartServlet extends BaseServlet {
 
-    private CartService cartService;
-
-    private ProductService productService;
-
-    @Override
-    public void init(ServletConfig config) throws ServletException {
-        ApplicationContext app = (ApplicationContext) config.getServletContext().getAttribute("app");
-        cartService = app.getBean(CartService.class);
-        productService = app.getBean(ProductService.class);
-    }
-
     @Path("list")
     public String cartList() {
         return "/WEB-INF/page/cart";
@@ -42,6 +32,8 @@ public class CartServlet extends BaseServlet {
 
     @Path("add-item")
     public InfoResult addItem() {
+        ProductService productService = WebApplicationContextUtils.getWebApplicationContext(getServletContext()).getBean(ProductService.class);
+        CartService cartService = WebApplicationContextUtils.getWebApplicationContext(getServletContext()).getBean(CartService.class);
         // 1 接受参数
         String pid = request.getParameter("pid");
         int num = Integer.parseInt(request.getParameter("num"));

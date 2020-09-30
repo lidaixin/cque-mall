@@ -5,6 +5,7 @@ import cn.edu.cque.mall.entity.Product;
 import cn.edu.cque.mall.service.CategoryService;
 import cn.edu.cque.mall.service.ProductService;
 import org.springframework.context.ApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -23,18 +24,12 @@ import java.util.List;
  **/
 public class IndexServlet extends HttpServlet {
 
-    private CategoryService categoryService;
-    private ProductService productService;
 
-    @Override
-    public void init(ServletConfig config) throws ServletException {
-        ApplicationContext app = (ApplicationContext) config.getServletContext().getAttribute("app");
-        categoryService = app.getBean(CategoryService.class);
-        productService = app.getBean(ProductService.class);
-    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        CategoryService categoryService = WebApplicationContextUtils.getWebApplicationContext(getServletContext()).getBean(CategoryService.class);
+        ProductService productService = WebApplicationContextUtils.getWebApplicationContext(getServletContext()).getBean(ProductService.class);
         // 1 查询数据
         // 1.1 查询商品类别数据
         List<Category> categoryList = categoryService.findAll();

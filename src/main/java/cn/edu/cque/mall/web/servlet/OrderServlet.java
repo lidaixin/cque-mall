@@ -8,6 +8,7 @@ import cn.edu.cque.mall.entity.User;
 import cn.edu.cque.mall.service.OrderService;
 import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.context.ApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -23,13 +24,6 @@ import java.util.Map;
  * @Version 1.0
  **/
 public class OrderServlet extends BaseServlet {
-    private OrderService orderService;
-
-    @Override
-    public void init(ServletConfig config) throws ServletException {
-        ApplicationContext app = (ApplicationContext) config.getServletContext().getAttribute("app");
-        orderService = app.getBean(OrderService.class);
-    }
 
     /***
      * 订单是由购物车转化来的
@@ -38,6 +32,7 @@ public class OrderServlet extends BaseServlet {
      **/
     @Path("create-order")
     public String createOrder() {
+        OrderService orderService = WebApplicationContextUtils.getRequiredWebApplicationContext(getServletContext()).getBean(OrderService.class);
         // 1 获取参数
         User user = (User) request.getSession().getAttribute("loginUser");
         Cart cart = (Cart) request.getSession().getAttribute("cart");
@@ -50,11 +45,13 @@ public class OrderServlet extends BaseServlet {
 
     @Path("update-order")
     public String updateOrder() {
+        OrderService orderService = WebApplicationContextUtils.getRequiredWebApplicationContext(getServletContext()).getBean(OrderService.class);
+
         // 1 获取参数
         Map<String, String[]> parameterMap = request.getParameterMap();
         Order order = new Order();
         try {
-            BeanUtils.populate(order,parameterMap);
+            BeanUtils.populate(order, parameterMap);
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         } catch (InvocationTargetException e) {
@@ -68,6 +65,7 @@ public class OrderServlet extends BaseServlet {
 
     @Path("list")
     public String orderList() {
+        OrderService orderService = WebApplicationContextUtils.getRequiredWebApplicationContext(getServletContext()).getBean(OrderService.class);
         // 1 从session中获取用户
         User loginUser = (User) request.getSession().getAttribute("loginUser");
         // 1 查询订单列表

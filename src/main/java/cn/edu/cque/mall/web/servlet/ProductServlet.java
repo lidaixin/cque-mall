@@ -8,6 +8,7 @@ import cn.edu.cque.mall.entity.Product;
 import cn.edu.cque.mall.service.CategoryService;
 import cn.edu.cque.mall.service.ProductService;
 import org.springframework.context.ApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -21,19 +22,10 @@ import javax.servlet.ServletException;
  **/
 public class ProductServlet extends BaseServlet {
 
-    private CategoryService categoryService;
-    private ProductService productService;
-
-    @Override
-    public void init(ServletConfig config) throws ServletException {
-        ApplicationContext app = (ApplicationContext) config.getServletContext().getAttribute("app");
-        productService = app.getBean(ProductService.class);
-        categoryService = app.getBean(CategoryService.class);
-    }
-
     // 可以通过注解的方式让方法告诉BaseServlet该方法要处理的请求的路径
     @Path("/detail")
     public String findById() {
+        ProductService productService = WebApplicationContextUtils.getWebApplicationContext(getServletContext()).getBean(ProductService.class);
         // 1 接受参数
         String id = request.getParameter("id");
         // 2 查询数据
@@ -45,6 +37,8 @@ public class ProductServlet extends BaseServlet {
 
     @Path("/list")
     public String findListByCid(){
+        ProductService productService = WebApplicationContextUtils.getWebApplicationContext(getServletContext()).getBean(ProductService.class);
+        CategoryService categoryService = WebApplicationContextUtils.getWebApplicationContext(getServletContext()).getBean(CategoryService.class);
         // 1 接受参数
         String cid = request.getParameter("cid");
         int currentPage = Integer.parseInt(request.getParameter("currentPage"));

@@ -66,6 +66,8 @@ public class OrderServiceImpl implements OrderService {
                 .build()
         ).collect(Collectors.toList());
         itemMapper.saveBatch(itemList);
+        // 4 清空购物车
+        cart.clearCart();
         return orderMapper.findById(orderId);
     }
 

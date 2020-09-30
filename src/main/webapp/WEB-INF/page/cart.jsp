@@ -17,7 +17,7 @@
     <div class="row">
         <span class="col-md-1 cart-title">购物车</span>
     </div>
-    <c:if test="${not empty cart}">
+    <c:if test="${not empty cart and not empty cart.list}">
         <div class="row">
             <div class="cart-thead">
                 <div class="col-md-1 t-checkbox">
@@ -80,7 +80,7 @@
             </div>
         </div>
     </c:if>
-    <c:if test="${empty cart}">
+    <c:if test="${empty cart or empty cart.list}">
         <h2 style="color: #4cae4c; text-align: center">您还没有选购商品</h2>
     </c:if>
 </section>

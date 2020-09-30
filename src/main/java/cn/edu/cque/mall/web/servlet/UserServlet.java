@@ -7,6 +7,7 @@ import cn.edu.cque.mall.entity.User;
 import cn.edu.cque.mall.service.UserService;
 import com.wf.captcha.utils.CaptchaUtil;
 import org.springframework.context.ApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -20,16 +21,6 @@ import javax.servlet.ServletException;
  **/
 public class UserServlet extends BaseServlet {
 
-    // 1 在servlet中的成员不要作修改
-    // 2 对于线程不安全问题可以通过事务来解决
-    private UserService userService;
-
-    @Override
-    public void init(ServletConfig config) throws ServletException {
-        ApplicationContext app = (ApplicationContext) config.getServletContext().getAttribute("app");
-        userService = app.getBean(UserService.class);
-    }
-
     /**
      * @return cn.edu.cque.mall.entity.InfoResult
      * @Author YoungWinter
@@ -39,6 +30,7 @@ public class UserServlet extends BaseServlet {
      **/
     @Path("login")
     public InfoResult login() {
+        UserService userService = WebApplicationContextUtils.getWebApplicationContext(getServletContext()).getBean(UserService.class);
         // 1 获取数据
         String verCode = request.getParameter("verCode");
         String username = request.getParameter("username");
