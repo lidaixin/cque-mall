@@ -20,6 +20,27 @@
     <script src="${pageContext.request.contextPath}/assets/js/jquery-3.4.1.min.js"></script>
     <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
     <script src="${pageContext.request.contextPath}/assets/js/bootstrap.min.js"></script>
+    <style type="text/css">
+        .cque-list {
+            margin: 10px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cque-list-nav {
+            margin: 10px;
+        }
+
+        .cque-list-content {
+            margin: 10px;
+        }
+
+        .cque-td {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+    </style>
 </head>
 
 <body>
@@ -44,10 +65,36 @@
             </div>
         </div>
         <div class="cque-main">
-            <h1>欢迎使用商城管理系统</h1>
+            <div class="cque-list">
+                <div class="cque-list-nav">
+                    <button class="btn btn-default" type="button">添加</button>
+                </div>
+                <div class="cque-list-content">
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>编号</th>
+                            <th>名称</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <c:forEach begin="1" end="4" var="item" varStatus="status">
+                            <tr>
+                                <td>${status.count}</td>
+                                <td>TB - Monthly</td>
+                                <td class="cque-td">
+                                    <button class="btn btn-default" type="button">修改</button>
+                                    <button class="btn btn-default" type="button">删除</button>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
 </div>
 </body>
-
 </html>

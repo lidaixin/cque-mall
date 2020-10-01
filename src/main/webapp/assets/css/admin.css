@@ -1,0 +1,24 @@
+.cque-window {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.cque-nav {
+    height: 80px;
+    display: flex;
+    align-items: center;
+}
+
+.cque-content {
+    flex: auto;
+    display: flex;
+}
+
+.cque-side{
+    width: 200px;
+}
+
+.cque-main{
+    flex: auto;
+}
