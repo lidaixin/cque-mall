@@ -48,7 +48,9 @@ public class BaseServlet extends HttpServlet {
                     request.getRequestDispatcher(result + ".jsp").forward(req, resp);
                 } else if (path.contains("redirect:")) {
                     response.sendRedirect(request.getContextPath() + path.split(":")[1]);
-                } else {
+                }
+                else {
+//                    System.out.println(req.getAttribute("orders"));
                     request.getRequestDispatcher("/jsp/" + result + ".jsp").forward(req, resp);
                 }
             } else {

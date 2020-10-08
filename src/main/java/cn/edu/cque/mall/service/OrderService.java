@@ -2,6 +2,7 @@ package cn.edu.cque.mall.service;
 
 import cn.edu.cque.mall.entity.Cart;
 import cn.edu.cque.mall.entity.Order;
+import cn.edu.cque.mall.entity.Product;
 import cn.edu.cque.mall.entity.User;
 
 import java.util.List;
@@ -22,4 +23,8 @@ public interface OrderService {
     List<Order> findAllByUid(String uid);
 
     Order findById(String id);
+
+    List<Order> findAll();
+
+    int deleteById(String oid);
 }

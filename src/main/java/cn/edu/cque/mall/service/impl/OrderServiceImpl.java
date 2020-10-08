@@ -83,4 +83,15 @@ public class OrderServiceImpl implements OrderService {
     public Order findById(String id) {
         return orderMapper.findById(id);
     }
+
+    @Override
+    public List<Order> findAll() {
+        return orderMapper.findAll();
+    }
+
+    @Override
+    public int deleteById(String oid) {
+        return orderMapper.deleteById(oid);
+    }
+
 }

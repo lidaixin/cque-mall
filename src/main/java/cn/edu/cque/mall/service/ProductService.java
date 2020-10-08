@@ -21,4 +21,10 @@ public interface ProductService {
     PageResult<Product> findPageResultByCid(String cid, int currentPage, int pageSize);
 
     Product findById(String id);
+
+    List<Product> findPageAll();
+
+    int deleteById(String id);
+
+    int addProduct(Product product);
 }

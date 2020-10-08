@@ -1,10 +1,7 @@
 package cn.edu.cque.mall.mapper;
 
 import cn.edu.cque.mall.entity.Category;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.ResultMap;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -27,4 +24,10 @@ public interface CategoryMapper {
 
     @Insert("insert into category values(#{cid}, #{cname})")
     void save(Category category);
+
+    @Delete("delete from category where cid = #{id}")
+    int deleteByCid(String cid);
+
+    @Update("update category set cname=#{cname} where cid = #{cid}")
+    int updateByCid(Category category);
 }

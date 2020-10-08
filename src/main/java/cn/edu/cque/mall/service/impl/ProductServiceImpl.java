@@ -4,12 +4,14 @@ import cn.edu.cque.mall.entity.PageResult;
 import cn.edu.cque.mall.entity.Product;
 import cn.edu.cque.mall.mapper.ProductMapper;
 import cn.edu.cque.mall.service.ProductService;
+import cn.edu.cque.mall.utils.UUIDUtils;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -47,5 +49,25 @@ public class ProductServiceImpl implements ProductService {
 
     public Product findById(String id) {
         return productMapper.findById(id);
+    }
+
+    @Override
+    public List<Product> findPageAll() {
+        return productMapper.findAllByCid("2");
+    }
+
+    @Override
+    public int deleteById(String id) {
+        return productMapper.deleteById(id);
+    }
+
+    @Override
+    public int addProduct(Product product) {
+        //生成商品UUID
+        String pid = UUIDUtils.getCode();
+        product.setId(pid);
+        product.setCreateDate(new Date());
+        //保存商品到数据库
+        return productMapper.insertProduct(product);
     }
 }

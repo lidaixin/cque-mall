@@ -19,4 +19,7 @@ public interface CategoryService {
 
     void save(Category category);
 
+    int deleteByCid(String cid);
+
+    int updateByCid(Category category);
 }

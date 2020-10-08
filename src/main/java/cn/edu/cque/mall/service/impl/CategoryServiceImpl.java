@@ -69,4 +69,14 @@ public class CategoryServiceImpl implements CategoryService {
     public void save(Category category) {
         categorymapper.save(category);
     }
+
+    @Override
+    public int deleteByCid(String cid) {
+        return categorymapper.deleteByCid(cid);
+    }
+
+    @Override
+    public int updateByCid(Category category) {
+        return categorymapper.updateByCid(category);
+    }
 }

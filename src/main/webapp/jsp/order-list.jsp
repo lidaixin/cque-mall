@@ -44,6 +44,7 @@
 </head>
 
 <body>
+
 <div class="cque-window">
     <div class="cque-nav">
         <div class="navbar-header" style="margin-left: 20px">
@@ -57,9 +58,9 @@
                 <div class="panel-heading">系统菜单</div>
                 <div class="panel-body" style="padding: 0">
                     <div class="list-group">
-                        <a href="/admin/category/list" class="list-group-item">商品类别管理</a>
-                        <a href="/admin/product/list" class="list-group-item">商品管理</a>
-                        <a href="/admin/order/list" class="list-group-item">订单管理</a>
+                        <a href="${pageContext.request.contextPath}/admin1/cart/list" class="list-group-item">商品类别管理</a>
+                        <a href="${pageContext.request.contextPath}/admin1/product/list?cid=1&currentPage=1&pageSize=10" class="list-group-item">商品管理</a>
+                        <a href="#" class="list-group-item">订单管理</a>
                     </div>
                 </div>
             </div>
@@ -67,25 +68,37 @@
         <div class="cque-main">
             <div class="cque-list">
                 <div class="cque-list-nav">
-                    <button class="btn btn-default" type="button">添加</button>
+                    <a href="${pageContext.request.contextPath}/jsp/addOrder.jsp">
+                        <button class="btn btn-default" type="button">添加</button>
+                    </a>
                 </div>
                 <div class="cque-list-content">
                     <table class="table table-bordered">
                         <thead>
                         <tr>
                             <th>编号</th>
-                            <th>名称</th>
+                            <th>状态</th>
+                            <th>收货地址</th>
+                            <th>收货人姓名</th>
+                            <th>电话</th>
                             <th>操作</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <c:forEach begin="1" end="4" var="item" varStatus="status">
+                        <c:forEach begin="1" end="9" items="${orders}" var="order" varStatus="orderStatu">
                             <tr>
-                                <td>${status.count}</td>
-                                <td>TB - Monthly</td>
+                                <td>${orderStatu.count}</td>
+                                <td>${order.state}</td>
+                                <td>${order.address}</td>
+                                <td>${order.name}</td>
+                                <td>${order.telephone}</td>
                                 <td class="cque-td">
-                                    <button class="btn btn-default" type="button">修改</button>
-                                    <button class="btn btn-default" type="button">删除</button>
+                                    <a href="${pageContext.request.contextPath}/jsp/updateOrder.jsp?oid=${order.id}&name=${order.name}">
+                                        <button class="btn btn-default btn-primary" type="button">修改</button>
+                                    </a>
+                                    <button onclick="deleteItem(${order.id})" type="button" class="btn btn-primary">
+                                        删除
+                                    </button>
                                 </td>
                             </tr>
                         </c:forEach>
@@ -96,5 +109,18 @@
         </div>
     </div>
 </div>
+<script>
+    // 删除订单
+    function deleteItem(id) {
+        var isDel = confirm('您确定要删除该订单吗?')
+        if (!isDel)
+            return
+        $.post('/admin1/deleteOrder', {oid: id}, function (result) {
+            // 跳转页面
+            alert("删除成功")
+            location.href = '/admin1/order/list'
+        })
+    }
+</script>
 </body>
 </html>

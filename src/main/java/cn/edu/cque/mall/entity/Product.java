@@ -1,5 +1,6 @@
 package cn.edu.cque.mall.entity;
 
+import lombok.Builder;
 import lombok.Data;
 import lombok.ToString;
 

@@ -1,7 +1,9 @@
 package cn.edu.cque.mall.mapper;
 
 import cn.edu.cque.mall.entity.Order;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.Date;
 import java.util.List;
@@ -22,4 +24,9 @@ public interface OrderMapper {
     void save(Order order);
 
     void updateOrderInfo(Order order);
+
+    List<Order> findAll();
+
+    @Delete("delete from orders where oid = #{oid}")
+    int deleteById(@Param("oid") String oid);
 }

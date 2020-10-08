@@ -111,4 +111,23 @@
         <url-pattern>/order/*</url-pattern>
     </servlet-mapping>
 
+    <!--后台管理系统servlet-->
+    <servlet>
+        <servlet-name>AdminIndexServlet</servlet-name>
+        <servlet-class>cn.edu.cque.mall.web.servlet.AdminIndexServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AdminIndexServlet</servlet-name>
+        <url-pattern>/admin</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AdminServlet</servlet-name>
+        <servlet-class>cn.edu.cque.mall.web.servlet.AdminServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AdminServlet</servlet-name>
+        <url-pattern>/admin1/*</url-pattern>
+    </servlet-mapping>
+
 </web-app>

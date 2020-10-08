@@ -14,13 +14,16 @@
         <result column="pflag" property="flag"/>
         <result column="cid" property="cid"/>
     </resultMap>
+    <insert id="insertProduct" parameterType="Product">
+        insert into product values (#{id},#{name},#{marketPrice},#{shopPrice},#{image},#{createDate},#{isHot},#{desc},0,3)
+    </insert>
 
     <select id="findById" resultMap="productMap">
         select * from product where pid = #{id}
     </select>
 
     <select id="findAllByCid" resultMap="productMap">
-        select * from product where cid = #{cid}
+        select * from product where cid = #{cid} and pflag = 0
     </select>
 
     <select id="findHotList" resultMap="productMap">
